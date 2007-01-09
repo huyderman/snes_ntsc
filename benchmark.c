@@ -1,4 +1,3 @@
-
 /* Measures performance of blitter, useful for improving a custom blitter.
 NOTE: This assumes that the process is getting 100% CPU time; you might need to
 arrange for this or else the performance will be reported lower than it really is. */
@@ -9,7 +8,7 @@ arrange for this or else the performance will be reported lower than it really i
 #include <stdio.h>
 #include <time.h>
 
-enum { time_high_res = 0 }; /* change to 1 to time high-res */
+enum { time_hires = 0 }; /* change to 1 to time hires mode */
 
 enum { in_width   = 256 * 2 };
 enum { in_height  = 223 };
@@ -52,7 +51,7 @@ int main()
 		/* measure frame rate */
 		while ( time_blitter() )
 		{
-			if ( time_high_res )
+			if ( time_hires )
 				snes_ntsc_blit_hires( &data->ntsc, data->in [0], in_width, 0,
 						in_width, in_height, data->out [0], sizeof data->out [0] );
 			else
@@ -63,6 +62,7 @@ int main()
 		free( data );
 	}
 	
+	getchar();
 	return 0;
 }
 
@@ -94,4 +94,3 @@ static int time_blitter( void )
 	
 	return 1;
 }
-
